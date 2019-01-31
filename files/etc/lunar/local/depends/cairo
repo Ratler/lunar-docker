@@ -1,0 +1,4 @@
+INTERPRETER="y"
+PTHREAD="y"
+TRACE="n"
+DOCS="n"
