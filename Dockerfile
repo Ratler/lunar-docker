@@ -28,6 +28,7 @@ RUN cat /tmp/depends >> /var/state/lunar/depends && \
     echo "MAKES=$PMAKES" > /etc/lunar/local/optimizations.GNU_MAKE && \
     lin moonbase && \
     lin lunar && \
+    lin -c python-setuptools meson && \
     lunar renew && \
     lin -c XOrg7 \
     mesa-lib \

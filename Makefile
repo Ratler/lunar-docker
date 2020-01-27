@@ -5,7 +5,7 @@ all: dockerize
 
 dockerize:
 	@if ! test -f $(ISO); then echo "ISO= not set to a valid ISO file"; exit 1; fi
-	@$(PWD)/dockerize-lunar.sh -i $(ISO) -e ci-lunar
+	$(PWD)/dockerize-lunar.sh -i "$(ISO)" -e ci-lunar
 
 ci-docker: dockerize 
 	@echo "Building $@"

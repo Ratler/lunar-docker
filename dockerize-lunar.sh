@@ -60,7 +60,7 @@ main() {
     rm -rf "$TARGET"
   }
 
-  trap "cleanup; exit 1" CHLD INT TERM KILL
+  trap "cleanup; exit 1" INT TERM KILL
 
   ISOMNT=$(mktemp -d /tmp/lunar-docker-iso.XXXXXX)
   SQFSMNT=$(mktemp -d /tmp/lunar-docker-sqfs.XXXXXX)
@@ -89,6 +89,12 @@ main() {
     exit 1
   else
     echo "Mounting rootfs.img at $ROOTFS"
+  fi
+
+  if [ -n "$STOP_ISO_TARGET" ]; then
+    cd $ROOTFS
+    bash
+    exit 1
   fi
 
   cd $TARGET
@@ -202,7 +208,7 @@ EOF
   echo "done."
 }
 
-GETOPT_ARGS=$(getopt -q -n dockerize-lunar.sh -o "i:t:e:" -l "iso:,targetdir:extratag:" -- "$@")
+GETOPT_ARGS=$(getopt -q -n dockerize-lunar.sh -o "i:t:e:" -l "iso:,targetdir:,extratag:,stop-iso" -- "$@")
 
 if [ -z "$?" ]; then
   help
@@ -221,6 +227,7 @@ else
       -t|--targetdir) export TARGET=$2; shift 2 ;;
       -e|--extratag) export EXTRATAG=$2; shift 2 ;;
       -h|--help) help; exit 1 ;;
+      --stop-iso) export STOP_ISO_TARGET=1; shift 1 ;;
       --) shift; break ;;
       *) help; exit 1 ;;
     esac
