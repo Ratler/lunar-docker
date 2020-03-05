@@ -17,7 +17,8 @@ RUN lunar set ACCEPTED_LICENSES all && \
     lunar set COMPRESS_METHOD bz2 && \
     lunar set SAFE_OPTIMIZATIONS on && \
     lunar set BOOTLOADER none && \
-    lunar set PROMPT_DELAY 0
+    lunar set PROMPT_DELAY 0 && \
+    lunar set KEEP_OBSOLETE_LIBS off
 
 # Fix perms
 RUN chmod +x /root/build-modules.sh
@@ -26,13 +27,5 @@ RUN chmod +x /root/build-modules.sh
 RUN cat /tmp/depends >> /var/state/lunar/depends && \
     cat /tmp/depends.backup >> /var/state/lunar/depends.backup && \
     echo "MAKES=$PMAKES" > /etc/lunar/local/optimizations.GNU_MAKE && \
-    lin moonbase && \
-    lin lunar && \
-    lin -c python-setuptools meson && \
-    lunar renew && \
-    lin -c XOrg7 \
-    mesa-lib \
-    git \
-    gtk+-3 \
-    rustc && \
-    rm -rf /tmp/* /var/spool/lunar/*
+    bash /tmp/install.sh && \
+    rm -f /tmp/install.sh

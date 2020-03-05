@@ -182,23 +182,8 @@ llvm:libffi:on:optional:-DLLVM_ENABLE_FFI=ON -DFFI_INCLUDE_DIR=/usr/include:-DLL
 lvm2:systemd systemd:on:required::
 mesa-demos:glew:on:required::
 mesa-demos:glu:on:required::
-mesa-lib:dbus-glib:on:required::
-mesa-lib:elfutils:on:required::
-mesa-lib:libdrm:on:required::
-mesa-lib:libgcrypt:on:required::
 mesa-lib:libomxil-bellagio:off:optional:--enable-omx-bellagio:--disable-omx-bellagio
-mesa-lib:libva:on:optional::
-mesa-lib:libvdpau:off:optional::
-mesa-lib:libXdamage:on:required::
-mesa-lib:libxml2:on:required::
-mesa-lib:libxshmfence:on:required::
-mesa-lib:libXvMC:off:optional:--enable-xvmc:--disable-xvmc
-mesa-lib:libXxf86misc:on:optional::
-mesa-lib:libXxf86vm:on:required::
-mesa-lib:llvm:on:required::
 mesa-lib:lm_sensors:off:optional:--enable-lmsensors:--disable-lmsensors
-mesa-lib:systemd systemd:on:required::
-mesa-lib:wayland-protocols:off:optional::
 mkfontdir:mkfontscale:on:required::
 mkfontscale:bzip2:on:optional:--with-bzip2:--without-bzip2
 mkfontscale:freetype2:on:required::
