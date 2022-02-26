@@ -9,7 +9,7 @@ chroot_run() {
   # mount --bind /tmp $TARGET/tmp
   # mount --bind /sys $TARGET/sys
   # mount --bind /run $TARGET/run
-  chroot $TARGET "$@"
+  chroot PATH=/sbin:/bin:/usr/sbin:/usr/bin $TARGET "$@"
   RESULT=$?
   # umount $TARGET/run
   # umount $TARGET/sys
@@ -101,7 +101,7 @@ main() {
   mkdir -p bin boot dev etc home lib mnt media
   mkdir -p proc root sbin srv tmp usr var opt
   mkdir -p sys
-  if [ `arch` == "x86_64" ]; then
+  if [ `uname -m` == "x86_64" ]; then
     ln -sf lib lib64
     ln -sf lib usr/lib64
   fi
