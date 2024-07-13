@@ -9,6 +9,6 @@ dockerize:
 
 ci-docker: dockerize 
 	@echo "Building $@"
-	docker build -t lunar-linux:latest --rm .
+	docker build -t lunar-linux:$(shell date "+%Y-%m-%d-%s") --rm .
 
 .PHONY: all dockerize ci-docker

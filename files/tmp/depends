@@ -1,17 +1,16 @@
 bdftopcf:xorgproto:on:required::
 bitmap:libXaw:on:required::
 bitmap:xbitmaps:on:required::
-cairo:DirectFB:off:optional:--enable-directfb:--disable-directfb
-cairo:fontconfig:on:optional:--enable-ft --enable-fc:--disable-fc
-cairo:freetype2:on:optional:--enable-ft:--disable-ft
 cairo:glib-2:on:required::
-cairo:gtk-doc:off:optional:--enable-gtk-doc:--disable-gtk-doc
-cairo:libpng:on:required::
-cairo:libXext:on:optional:--enable-xlib --enable-xcb --enable-xlib-xcb --enable-tee:--disable-xlib --disable-xlib-xcb
-cairo:libXrender:on:optional:--enable-xlib-xrender:--disable-xlib-xrender
-cairo:lzo:on:required::
 cairo:pixman:on:required::
-cairo:qt5:off:optional:--enable-qt:--disable-qt
+cairo:libpng:on:required::
+cairo:lzo:on:required::
+cairo:zlib:on:required::
+cairo:libxcb:on:required::
+cairo:libXext:on:required::
+cairo:libXrender:on:required::
+cairo:fontconfig:on:required::
+cairo:freetype2:on:required::
 cmake:bzip2:on:required::
 cmake:curl:on:optional:--system-curl:--no-system-curl
 cmake:expat:on:optional:--system-expat:--no-system-expat
@@ -89,31 +88,39 @@ font-xfree86-type1:fontconfig:on:required::
 font-xfree86-type1:font-util:on:required::
 freeglut:cmake:on:required::
 freeglut:glu:on:required::
-freetype2:bzip2:on:optional:--with-bzip2:--without-bzip2
-freetype2:libpng:on:optional:--with-png:--without-png
-freetype2:zlib:on:optional:--with-zlib:--without-zlib
+freetype2:meson:on:required::
+freetype2:zlib:on:required::
+freetype2:bzip2:on:required::
+freetype2:libpng:on:optional:-D png=enabled:-D png=disabled
+freetype2:brotli:off:optional:-D brotli=enabled:-D brotli=disabled
 glew:libXmu:on:required::
 glew:mesa-lib:on:required::
+json-glib:glib-2:on:required::
+json-glib:meson:on:required::
+json-glib:libxslt:off:optional:-D man=true:-D man=false
+json-glib:gobject-introspection:on:optional:-D introspection=enabled:-D introspection=disabled
+json-glib:gtk-doc:off:optional:-D gtk_doc=enabled:-D gtk_doc=disabled
 glu:mesa-lib:on:required::
+gegl:gobject-introspection:on:optional:-Dintrospection=true:-Dintrospection=false
 icu4c:pkgconf:on:required::
 irssi:perl:off:optional:--with-perl:--without-perl
 libdmx:libXext:on:required::
 libdrm:cairo:on:required::
-libdrm:docbook-xsl:off:optional:-Dman-pages=true:-Dman-pages=false
 libdrm:libpciaccess:on:required::
-libdrm:libxslt:on:required::
-libdrm:meson:on:required::
-libdrm:systemd systemd:on:required::
 libdrm:util-macros:on:required::
-libdrm:valgrind:off:optional:-Dvalgrind=true:-Dvalgrind=false
+libdrm:libxslt:on:required::
+libdrm:systemd:on:required::
+libdrm:meson:on:required::
+libdrm:docbook-xsl:off:optional:-Dman-pages=enabled:-Dman-pages=disabled
 libevdev:check:on:required::
 libevdev:doxygen:off:optional::
 libevdev:valgrind:off:optional::
 libfontenc:xorgproto:on:required::
 libfontenc:zlib:on:required::
 libICE:xtrans:on:required::
+libpciaccess:meson:on:required::
 libpciaccess:util-macros:on:required::
-libpciaccess:zlib:on:optional:--with-zlib:--without-zlib
+libpciaccess:zlib:on:optional:-Dzlib=enabled:-Dzlib=disabled
 libpng:zlib:on:required::
 libpthread-stubs:pkgconf:on:required::
 libSM:libICE:on:required::
@@ -182,8 +189,35 @@ llvm:libffi:on:optional:-DLLVM_ENABLE_FFI=ON -DFFI_INCLUDE_DIR=/usr/include:-DLL
 lvm2:systemd systemd:on:required::
 mesa-demos:glew:on:required::
 mesa-demos:glu:on:required::
-mesa-lib:libomxil-bellagio:off:optional:--enable-omx-bellagio:--disable-omx-bellagio
-mesa-lib:lm_sensors:off:optional:--enable-lmsensors:--disable-lmsensors
+mesa-lib:systemd:on:required::
+mesa-lib:python-ply:on:required::
+mesa-lib:meson:on:required::
+mesa-lib:expat:on:required::
+mesa-lib:elfutils:on:required::
+mesa-lib:libgcrypt:on:required::
+mesa-lib:libdrm:on:required::
+mesa-lib:libXxf86vm:on:required::
+mesa-lib:libXdamage:on:required::
+mesa-lib:libxshmfence:on:required::
+mesa-lib:libXrandr:on:required::
+mesa-lib:libxml2:on:required::
+mesa-lib:dbus-glib:on:required::
+mesa-lib:python-mako:on:required::
+mesa-lib:wayland-protocols:on:required::
+mesa-lib:libglvnd:on:required::
+mesa-lib:libunwind:on:required::
+mesa-lib:libvdpau:on:required::
+mesa-lib:libXvMC:on:required::
+mesa-lib:libepoxy:on:required::
+mesa-lib:zstd:on:required::
+mesa-lib:libva:on:required::
+mesa-lib:glslang:on:required::
+mesa-lib:libomxil-bellagio:on:required::
+mesa-lib:cbindgen:on:required::
+mesa-lib:rust-bindgen:on:required::
+mesa-lib:llvm:on:optional:-D llvm=enabled:-D llvm=disabled
+mesa-lib:libclc:on:optional:-D intel-clc=enabled:-D intel-clc=disabled
+mesa-lib:lm_sensors:on:optional:-D lmsensors=enabled:-D lmsensors=disabled
 mkfontdir:mkfontscale:on:required::
 mkfontscale:bzip2:on:optional:--with-bzip2:--without-bzip2
 mkfontscale:freetype2:on:required::

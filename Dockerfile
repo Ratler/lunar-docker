@@ -1,7 +1,7 @@
 FROM lunar-linux:ci-lunar
 MAINTAINER Stefan Wold <ratler@lunar-linux.org>
 
-ENV PMAKES 30
+ENV PMAKES 5
 ENV SHELL=/bin/bash
 ENV USER=root
 
