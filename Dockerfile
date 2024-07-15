@@ -1,5 +1,5 @@
 FROM lunar-linux:ci-lunar
-MAINTAINER Stefan Wold <ratler@lunar-linux.org>
+LABEL org.opencontainers.image.authors="Stefan Wold <ratler@lunar-linux.org>"
 
 ENV PMAKES 5
 ENV SHELL=/bin/bash
@@ -19,6 +19,9 @@ RUN lunar set ACCEPTED_LICENSES all && \
     lunar set BOOTLOADER none && \
     lunar set PROMPT_DELAY 0 && \
     lunar set KEEP_OBSOLETE_LIBS off
+
+# Always return true when kernel_option_present is called in CI
+RUN echo "function kernel_option_present () { return 0; }" >> /etc/lunar/local/config
 
 # Fix perms
 RUN chmod +x /root/build-modules.sh
